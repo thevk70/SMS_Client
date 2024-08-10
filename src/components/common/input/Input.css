@@ -1,0 +1,48 @@
+.input-text {
+    border-radius: 0.5rem;
+    border: 1px solid rgb(207, 209, 209);
+    height: 0.4rem;
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: -internal-light-dark(rgb(232, 240, 254), rgba(70, 90, 126, 0.4)) !important;
+  }
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    padding: 0.6rem 1.8rem;
+  }
+  .form-field-row{
+    display: flex;
+    justify-content: space-between;
+    max-width: 100%;
+    padding: 0.6rem 1.8rem;
+  }
+  .form-field-row label{
+    flex-direction: column;
+  }
+  .form-label {
+    font-size: 1rem;
+    font-weight: 500;
+    padding-left: 1.5rem;
+  }
+ .input-text-invalid {
+  border-radius: 0.5rem;
+  border: 1px solid rgb(207, 209, 209);
+  height: 1.3rem;
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: -internal-light-dark(rgb(232, 240, 254), rgba(70, 90, 126, 0.4)) !important;
+  border: 2px dashed red;
+ }
+ .error-msg{
+  color: red;
+  font-size: 1rem;
+ }
+
+ /* Hide spinners in Chrome, Safari, Edge, Opera */
+ input[type="number"]::-webkit-outer-spin-button,
+ input[type="number"]::-webkit-inner-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+ }
