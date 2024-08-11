@@ -107,6 +107,7 @@ const Registration = () => {
             required={true}
             value={userConfirmPassword}
             onChange={setUserConfirmPassword}
+            onKeyUp={handleKeypress}
           />
 
           <div className="btn-container-login">
