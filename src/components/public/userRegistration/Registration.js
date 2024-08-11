@@ -38,7 +38,7 @@ const Registration = () => {
       dispatch(createUser(getBaseUrl() + "user/createUser", obj))
         .then(() => {
           setIsloading(false);
-          nevigate("/");
+          nevigate("/SMS_Client");
         })
         .catch(setIsloading(false));
     } else {

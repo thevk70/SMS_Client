@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/SMS_Client" element={<Login />} />
           <Route path="/resetPassword" element={<ResetPassword />} />
           <Route
             path="/passwordResetSuccess"

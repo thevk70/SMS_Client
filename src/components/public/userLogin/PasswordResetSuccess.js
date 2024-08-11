@@ -7,7 +7,7 @@ const PasswordResetSuccess = () => {
     <div className="success-container">
       <h2>Password Reset Successful</h2>
       <p>Your password has been successfully reset. You can now log in with your new password.</p>
-      <Link to="/" className="login-link">
+      <Link to="/SMS_Client" className="login-link">
         Go to Login
       </Link>
     </div>
