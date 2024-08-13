@@ -7,6 +7,10 @@ import Loading from "../../common/loading/Loading";
 import InputBox from "../../common/input/Input";
 import getBaseUrl from "../../../config/utility";
 import { createUser } from "../../../actions/UserAction";
+import {
+  validateEmail,
+  validatePassword,
+} from "../../common/validation/Validation";
 
 const Registration = () => {
   const dispatch = useDispatch();
@@ -34,6 +38,22 @@ const Registration = () => {
       userPassword.length > 0 &&
       userConfirmPassword.length > 0
     ) {
+      if (!validateEmail(userEmail)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
+      if (!validatePassword(userPassword)) {
+        alert(
+          "Password must be at least 8 characters long and include uppercase letters, lowercase letters, digits, and special characters."
+        );
+        return;
+      }
+
+      if (userPassword !== userConfirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
       setIsloading(true);
       dispatch(createUser(getBaseUrl() + "user/createUser", obj))
         .then(() => {
