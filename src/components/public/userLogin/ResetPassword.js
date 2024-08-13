@@ -8,6 +8,10 @@ import generateOtp from "../../../actions/GenerateOtp";
 import getBaseUrl from "../../../config/utility";
 import "./ResetPassword.css";
 import InputBox from "../../common/input/Input";
+import {
+  validateEmail,
+  validatePassword,
+} from "../../common/validation/Validation";
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
@@ -22,27 +26,49 @@ const ResetPassword = () => {
   const otpResponse = useSelector((store) => store.otp);
 
   const resetPasswordHandler = () => {
-    let obj = {
-      email: userEmail,
-      password: userPassword,
-      confirmPassword: userConfirmPassword,
-      otp: otp,
-      otpId: otpResponse.data.otpId,
-    };
-    if (
-      userEmail.length > 0 &&
-      userPassword.length > 0 &&
-      userConfirmPassword.length > 0
-    ) {
-      setIsloading(true);
-      dispatch(generateOtp(getBaseUrl() + "user/resetPassword", obj))
-        .then(() => {
-          setIsloading(false);
-          nevigate("/passwordResetSuccess");
-        })
-        .catch(setIsloading(false));
+    console.log(otpResponse.data.otpId);
+
+    if (otpResponse !== undefined) {
+      let obj = {
+        email: userEmail,
+        password: userPassword,
+        confirmPassword: userConfirmPassword,
+        otp: otp,
+        otpId: otpResponse.data.otpId,
+      };
+      if (
+        userEmail.length > 0 &&
+        userPassword.length > 0 &&
+        userConfirmPassword.length > 0
+      ) {
+        if (!validateEmail(userEmail)) {
+          alert("Please enter a valid email address.");
+          return;
+        }
+
+        if (!validatePassword(userPassword)) {
+          alert(
+            "Password must be at least 8 characters long and include uppercase letters, lowercase letters, digits, and special characters."
+          );
+          return;
+        }
+
+        if (userPassword !== userConfirmPassword) {
+          alert("Passwords do not match.");
+          return;
+        }
+        setIsloading(true);
+        dispatch(generateOtp(getBaseUrl() + "user/resetPassword", obj))
+          .then(() => {
+            setIsloading(false);
+            nevigate("/passwordResetSuccess");
+          })
+          .catch(setIsloading(false));
+      } else {
+        setIsubmit(true);
+      }
     } else {
-      setIsubmit(true);
+      alert("Generate OTP first.");
     }
   };
 
@@ -64,7 +90,7 @@ const ResetPassword = () => {
 
           {userEmail !== "" && (
             <section className="form-field">
-              <div>
+              <div className="otp-container">
                 <input
                   className="input-text width-50p"
                   type="texts"
