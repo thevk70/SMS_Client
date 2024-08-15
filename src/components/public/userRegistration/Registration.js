@@ -10,6 +10,7 @@ import { createUser } from "../../../actions/UserAction";
 import {
   validateEmail,
   validatePassword,
+  validatePhoneNo,
 } from "../../common/validation/Validation";
 
 const Registration = () => {
@@ -47,6 +48,11 @@ const Registration = () => {
         alert(
           "Password must be at least 8 characters long and include uppercase letters, lowercase letters, digits, and special characters."
         );
+        return;
+      }
+
+      if (!validatePhoneNo(phoneNo)) {
+        alert("Please enter a valid 10-digit phone number.");
         return;
       }
 
