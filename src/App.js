@@ -5,6 +5,7 @@ import Registration from "./components/public/userRegistration/Registration";
 import ResetPassword from "./components/public/userLogin/ResetPassword";
 import PasswordResetSuccess from "./components/public/userLogin/PasswordResetSuccess";
 import WelcomePage from "./components/public/userLogin/WelcomePage";
+import ErrorMsg from "./components/common/error/Error";
 function App() {
   return (
     <div className="App">
@@ -19,6 +20,7 @@ function App() {
           <Route path="/welcomePage" element={<WelcomePage />} />
           <Route path="/createuser" element={<Registration />} />
         </Routes>
+        <ErrorMsg />
       </Router>
     </div>
   );

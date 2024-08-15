@@ -5,6 +5,9 @@
   justify-content: flex-end;
   padding: 20px;
 }
+.wrapper-container-disable{
+  display: none;
+}
 .error-container {
   width: 640px;
 }
@@ -16,6 +19,7 @@
   margin: 10px 0;
   padding: 10px;
   border-radius: 3px 3px 3px 3px;
+  border-radius: 10px;
 }
 .info-msg {
   color: #059;
@@ -32,4 +36,8 @@
 .error-msg {
   color: #d8000c;
   background-color: #ffbaba;
+}
+
+.logo {
+  padding-right: 5px;
 }

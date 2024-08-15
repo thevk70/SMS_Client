@@ -9,4 +9,9 @@ const validatePassword = (password) => {
   return regex.test(password);
 };
 
-export { validateEmail, validatePassword };
+const validatePhoneNo = (phoneNo) => {
+  const regex = /^[0-9]{10}$/;
+  return regex.test(phoneNo);
+};
+
+export { validateEmail, validatePassword, validatePhoneNo };

@@ -114,7 +114,7 @@ const ResetPassword = () => {
                       .catch(() => setIsloading(false));
                   }}
                 >
-                  Generate OTP
+                  Send OTP
                 </button>
               </div>
             </section>
