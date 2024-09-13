@@ -1,0 +1,76 @@
+/* Base navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    padding-left: 7rem;
+    padding-right: 10.5rem;
+    border: none;
+    background-color: #0caa7d;
+    color: #fff;
+  }
+  
+  .nav-item ul {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-item ul li a {
+    text-decoration: none;
+    font-weight: 700;
+    color: #fff;
+  }
+  
+  .sigout_btn-container {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+  }
+  
+  .signout-btn {
+    cursor: pointer;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+  }
+  
+  /* Responsive behavior */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 20px;
+    }
+  
+    .nav-item ul {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .signout-btn {
+      margin-top: 15px;
+      width: 100%; /* Make sign out button full-width */
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .navbar {
+      padding: 10px;
+    }
+  
+    .nav-item ul {
+      flex-direction: column;
+      gap: 8px;
+    }
+  
+    .signout-btn {
+      font-size: 14px;
+      padding: 8px 20px;
+    }
+  }
+  

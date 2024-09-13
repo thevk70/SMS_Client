@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Loading from "../../common/loading/Loading";
 import { useNavigate } from "react-router-dom";
 import generateOtp from "../../../actions/GenerateOtp";
-import getBaseUrl from "../../../config/utility";
+import { getBaseUrl } from "../../../config/utility";
 import "./ResetPassword.css";
 import InputBox from "../../common/input/Input";
 import {

@@ -2,13 +2,12 @@ import axios from "axios";
 
 const apiMiddleware = (store) => (next) => (action) => {
   const API_ERRORS = "errors/onApiError";
+  let messages = [];
 
   if (action.type === API_ERRORS) {
     next(action);
     return Promise.reject(action.error);
   }
-
-  /* Check if meta is present. Then treat this trigger as api call*/
 
   if (!(action.meta && action.meta.api)) {
     next(action);
@@ -46,35 +45,47 @@ const apiMiddleware = (store) => (next) => (action) => {
       timeout: timeout || 0,
       headers: customHeaders,
       responseType: responseType || "",
+      validateStatus: function (status) {
+        return status >= 200 && status < 500; // Allow 4xx errors to be resolved
+      },
     })
       .then((response) => {
+        if (response.status >= 400) {
+          // Capture error message from response data
+          const errorMessage =
+            response.data?.message || "Something went wrong.";
+          messages.push(errorMessage);
+
+          next({
+            type: API_ERRORS,
+            error: messages,
+            action,
+          });
+          return reject(new Error(errorMessage));
+        }
+
+        // Proceed with success response
         action.response = response.data;
         action.responseObject = response;
         next(action);
-
-        let value;
-
-        if (action.resolve) {
-          value = response.data;
-        }
-        if (responseType === "blob") {
-          value = response;
-        }
-        return resolve(value);
+        return resolve(response.data);
       })
       .catch((error) => {
-        // TO Do: Format error message here and then dispacth error action.
+        // Handle network errors or any unexpected errors
         action.error = error;
         action.response = {};
 
-        var messages = [];
         if (error?.code === "ERR_NETWORK") {
           messages.push(
-            "Network error: Something went worng please try again after sometime."
+            "Network error: Something went wrong, please try again later."
           );
         } else {
-          messages = error?.response?.data;
+          // Handle non-network errors
+          messages.push(
+            error.response?.data?.message || "An unexpected error occurred."
+          );
         }
+
         next({
           type: API_ERRORS,
           error: messages,

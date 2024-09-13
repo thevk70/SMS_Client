@@ -1,37 +1,49 @@
-import React, { useState } from "react";
-import "./Error.css";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import Toast from "../toast/Toast";
 
 const ErrorMsg = ({ type, message }) => {
-  const [show, setShow] = useState(false);
+  const [localErrorState, setLocalErrorState] = useState([]);
+  const [isVisible, setIsVisible] = useState(true);
+  const [toastVisible, setToastVisible] = useState(true);
+  const errors = useSelector((store) => store.error);
+
+  useEffect(() => {
+    setLocalErrorState(errors);
+    if (errors && Array.isArray(errors) && errors.length > 0) {
+      setIsVisible(true);
+    }
+  }, [errors]);
+
+  const onCloseClickHandler = (value) => {
+    setIsVisible(value);
+  };
+
+  const showToast = () => {
+    setToastVisible(true); // Show the toast
+  };
+
+  const closeToast = () => {
+    setToastVisible(false); // Hide the toast after the duration
+  };
   return (
-    <div className={show ? "wrapper-container" : "wrapper-container-disable"}>
-      <div className="error-container">
-        <div className="info-msg">
-          <i className="fa fa-info-circle logo"></i>
-          This is an info message.
-        </div>
-
-        <div className="success-msg">
-          <i className="fa fa-check logo"></i>
-          This is a success message.
-        </div>
-
-        <div className="warning-msg">
-          <i className="fa fa-warning logo"></i>
-          This is a warning message.
-        </div>
-
-        <div className="error-msg">
-          <i className="fa fa-times-circle logo"></i>
-          This is a error message.
-        </div>
-        {/* 
-        <div className="error-msg">
-          <i className={iconClass}></i>
-          <span className={messageClass}>{message}</span>
-        </div> */}
-      </div>
-    </div>
+    <>
+      {localErrorState &&
+        Array.isArray(localErrorState) &&
+        localErrorState.length > 0 &&
+        localErrorState.map((item) => {
+          return (
+            <Toast
+              visible={toastVisible}
+              message={item}
+              type="error"
+              onCloseClick={() => onCloseClickHandler(false)}
+              onClose={closeToast}
+              duration={2000}
+            />
+          );
+        })}
+    </>
   );
 };
 

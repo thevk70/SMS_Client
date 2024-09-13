@@ -1,0 +1,66 @@
+.wrapper-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.wrapper-container-disable {
+  display: none;
+}
+
+.toast-container {
+  width: 100%;
+  max-width: 640px;
+  padding: 10px 40px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-msg {
+  color: #059;
+  background-color: #bef;
+}
+
+.success-msg {
+  color: #270;
+  background-color: #dff2bf;
+}
+
+.warning-msg {
+  color: #9f6000;
+  background-color: #feefb3;
+}
+
+.error-msg {
+  color: #d8000c;
+  background-color: #ffbaba;
+}
+
+.logo {
+  padding-right: 10px;
+}
+
+.toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5px;
+  background-color: #ff9800; /* Customize the color for the progress bar */
+  transition: width 0.1s linear;
+}
+
+@media only screen and (max-width: 768px) {
+  .toast-container {
+    width: 90%; /* Full width on smaller screens */
+    max-width: 90%;
+  }
+
+  .logo {
+    padding-right: 5px; /* Adjust icon padding for smaller screens */
+  }
+}

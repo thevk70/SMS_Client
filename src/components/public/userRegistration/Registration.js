@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../common/loading/Loading";
 import InputBox from "../../common/input/Input";
-import getBaseUrl from "../../../config/utility";
+import { getBaseUrl } from "../../../config/utility";
 import { createUser } from "../../../actions/UserAction";
 import {
   validateEmail,
