@@ -4,10 +4,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import getBaseUrl from "../../../config/utility";
+import { getBaseUrl } from "../../../config/utility";
 import Loading from "../../common/loading/Loading";
 import InputBox from "../../common/input/Input";
 import LoginAction from "../../../actions/LoginAction";
+import { setAuthorization } from "../../../actions/UserAction";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -30,15 +31,18 @@ const Login = () => {
         .then((responseResult) => {
           if (responseResult.message.toLowerCase() === "success") {
             sessionStorage.setItem("token", responseResult.token);
+            console.log(sessionStorage.getItem("token"));
+            
           }
           // var user = jwtDecode(responseResult.token);
           // var UserId = user.UserId;
+          setAuthorization("true");
           setIsloading(false);
           nevigate("/welcomePage");
         })
         .catch(() => {
-          setIsloading("false");
-          alert("Please check your Username or Password and try again.");
+          setIsloading(false);
+          // alert("Please check your Username or Password and try again.");
         });
     } else {
       setIsubmit(true);

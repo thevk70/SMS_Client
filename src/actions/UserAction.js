@@ -1,4 +1,8 @@
-import { GET_ALL_USERS, CREATE_USER } from "../actiontypes/ActionTypes";
+import {
+  GET_ALL_USERS,
+  CREATE_USER,
+  userAuth,
+} from "../actiontypes/ActionTypes";
 
 const getAllUsers = (url) => {
   return {
@@ -14,7 +18,7 @@ const getAllUsers = (url) => {
 
 const createUser = (url, obj) => {
   console.log(obj);
-  
+
   return {
     type: CREATE_USER,
     resolve: true,
@@ -28,4 +32,11 @@ const createUser = (url, obj) => {
   };
 };
 
-export { getAllUsers, createUser };
+const setAuthorization = (isAuth) => {
+  return {
+    type: userAuth,
+    isAuth: isAuth,
+  };
+};
+
+export { getAllUsers, createUser, setAuthorization };
